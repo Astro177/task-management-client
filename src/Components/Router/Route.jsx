@@ -1,6 +1,4 @@
-import {
-    createBrowserRouter
-} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Home from "../Home/Home";
 import MainBody from "../MainBody/MainBody";
 import Login from "../Login/Login";
@@ -14,56 +12,57 @@ import WorkDetails from "../Dashboard/WorkDetails";
 import UserProfile from "../Dashboard/userProfile";
 
 export const router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <MainBody></MainBody>,
+    children: [
+      {
         path: "/",
-        element: <MainBody></MainBody>,
-        children: [
-            {
-                path: '/',
-                element: <Home></Home>
-            },
-            {
-                path: '/aboutus',
-                element: <AboutUs></AboutUs>
-            },
-            {
-                path: '/contact',
-                element: <Contact></Contact>
-            },
+        element: <Home></Home>,
+      },
+      {
+        path: "/aboutus",
+        element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
 
-            {
-                path: '/login',
-                element: <Login></Login>
-            },
-            {
-                path: '/register',
-                element: <Register></Register>
-            }
-        ]
-    },
-    {
-        path: '/dashboard',
-        element: <Dashboard></Dashboard>,
-        children: [
-            {
-                path: '/dashboard/target',
-                element: <TargetAudience></TargetAudience>
-            },
-            {
-                path: '/dashboard/mywork',
-                element: <MyWork></MyWork>,
-
-            },
-            {
-                path: '/dashboard/profile',
-                element: <UserProfile></UserProfile>
-            },
-            {
-                path: '/dashboard/wrokdetails/:id',
-                element: <WorkDetails></WorkDetails>,
-                loader: ({ params }) => fetch(`https://task-management-server-silk.vercel.app/workdatas/${params.id}`)
-            }
-        ]
-    },
-
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "/dashboard/target",
+        element: <TargetAudience></TargetAudience>,
+      },
+      {
+        path: "/dashboard/mywork",
+        element: <MyWork></MyWork>,
+      },
+      {
+        path: "/dashboard/profile",
+        element: <UserProfile></UserProfile>,
+      },
+      {
+        path: "/dashboard/wrokdetails/:id",
+        element: <WorkDetails></WorkDetails>,
+        loader: ({ params }) =>
+          fetch(
+            `https://task-management-server-eight-pied.vercel.app/workdatas/${params.id}`
+          ),
+      },
+    ],
+  },
 ]);
